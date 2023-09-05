@@ -16,7 +16,7 @@ deploy_dev:
     - ssh -o StrictHostKeyChecking=no $DEV_USER@$DEV_HOST "cd /home/kraft_front/www/front-promo-orenbeer.dreamdev.space &&
         git fetch origin &&
         git reset --hard origin/dev &&
-        npm ci
+        npm ci &&
         npm run generate"
 
   only:
