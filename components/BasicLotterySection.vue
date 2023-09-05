@@ -60,16 +60,16 @@
 	import { useStore } from "vuex";
 	const staticData = [
 		{
-			srcset: "images/prize-img1@1x.webp, images/prize-img1@2x.webp 2x",
-			srcimg: "images/prize-img1@2x.webp 2x"
+			srcset: "/images/prize-img1@1x.webp, /images/prize-img1@2x.webp 2x",
+			srcimg: "/images/prize-img1@2x.webp 2x"
 		},
 		{
-			srcset: "images/prize-img2@1x.webp, images/prize-img2@2x.webp 2x",
-			srcimg: "images/prize-img2@2x.webp 2x"
+			srcset: "/images/prize-img2@1x.webp, /images/prize-img2@2x.webp 2x",
+			srcimg: "/images/prize-img2@2x.webp 2x"
 		},
 		{
-			srcset: "images/prize-img3@1x.webp, images/prize-img3@2x.webp 2x",
-			srcimg: "images/prize-img3@2x.webp 2x"
+			srcset: "/images/prize-img3@1x.webp, /images/prize-img3@2x.webp 2x",
+			srcimg: "/images/prize-img3@2x.webp 2x"
 		},
 	]
 

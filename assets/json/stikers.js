@@ -7,19 +7,19 @@ export const staticData = [
 		isActive: false,
 		items: [
 			{
-				srcset: "images/sticker1@1x.webp, images/sticker1@2x.webp 2x",
+				srcset: "/images/sticker1@1x.webp, /images/sticker1@2x.webp 2x",
 				srcImg: 'images/sticker1@2x.jpg 2x'
 			},
 			{
-				srcset: "images/sticker2@1x.webp, images/sticker2@2x.webp 2x",
+				srcset: "/images/sticker2@1x.webp, /images/sticker2@2x.webp 2x",
 				srcImg: 'images/sticker2@2x.jpg 2x'
 			},
 			{
-				srcset: "images/sticker3@1x.webp, images/sticker3@2x.webp 2x",
+				srcset: "/images/sticker3@1x.webp, /images/sticker3@2x.webp 2x",
 				srcImg: 'images/sticker3@2x.jpg 2x'
 			},
 			{
-				srcset: "images/sticker4@1x.webp, images/sticker4@2x.webp 2x",
+				srcset: "/images/sticker4@1x.webp, /images/sticker4@2x.webp 2x",
 				srcImg: 'images/sticker4@2x.jpg 2x'
 			},
 		]
@@ -32,19 +32,19 @@ export const staticData = [
 		isActive: true,
 		items: [
 			{
-				srcset: "images/sticker5@1x.webp, images/sticker5@2x.webp 2x",
+				srcset: "/images/sticker5@1x.webp, /images/sticker5@2x.webp 2x",
 				srcImg: 'images/sticker5@2x.jpg 2x'
 			},
 			{
-				srcset: "images/sticker6@1x.webp, images/sticker6@2x.webp 2x",
+				srcset: "/images/sticker6@1x.webp, /images/sticker6@2x.webp 2x",
 				srcImg: 'images/sticker6@2x.jpg 2x'
 			},
 			{
-				srcset: "images/sticker7@1x.webp, images/sticker7@2x.webp 2x",
+				srcset: "/images/sticker7@1x.webp, /images/sticker7@2x.webp 2x",
 				srcImg: 'images/sticker7@2x.jpg 2x'
 			},
 			{
-				srcset: "images/sticker8@1x.webp, images/sticker8@2x.webp 2x",
+				srcset: "/images/sticker8@1x.webp, /images/sticker8@2x.webp 2x",
 				srcImg: 'images/sticker8@2x.jpg 2x'
 			},
 		]
@@ -57,19 +57,19 @@ export const staticData = [
 		isActive: false,
 		items: [
 			{
-				srcset: "images/sticker9@1x.webp, images/sticker9@2x.webp 2x",
+				srcset: "/images/sticker9@1x.webp, /images/sticker9@2x.webp 2x",
 				srcImg: 'images/sticker9@2x.jpg 2x'
 			},
 			{
-				srcset: "images/sticker10@1x.webp, images/sticker10@2x.webp 2x",
+				srcset: "/images/sticker10@1x.webp, /images/sticker10@2x.webp 2x",
 				srcImg: 'images/sticker10@2x.jpg 2x'
 			},
 			{
-				srcset: "images/sticker11@1x.webp, images/sticker11@2x.webp 2x",
+				srcset: "/images/sticker11@1x.webp, /images/sticker11@2x.webp 2x",
 				srcImg: 'images/sticker11@2x.jpg 2x'
 			},
 			{
-				srcset: "images/sticker12@1x.webp, images/sticker12@2x.webp 2x",
+				srcset: "/images/sticker12@1x.webp, /images/sticker12@2x.webp 2x",
 				srcImg: 'images/sticker12@2x.jpg 2x'
 			},
 		]

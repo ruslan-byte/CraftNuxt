@@ -16,7 +16,7 @@
 						<div class="instant-prize__img-box">
 							<picture>
 								<source :srcset="staticData[index].srcset" type="image/webp"/>
-								<img class="instant-prize__img" src="images/instant-card-img1@1x.png" :srcset="staticData[index].imgSrcset" alt=""/>
+								<img class="instant-prize__img" src="/images/instant-card-img1@1x.png" :srcset="staticData[index].imgSrcset" alt=""/>
 							</picture>
 						</div>
 						<figcaption class="instant-prize__text">{{sticker.name}}</figcaption>

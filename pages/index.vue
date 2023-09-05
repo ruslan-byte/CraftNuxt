@@ -14,7 +14,7 @@
 				</div>
 				<div class="section-hero__img-box">
 					<picture>
-						<source srcset="images/hero-img1@1x.webp, images/hero-img1@2x.webp 2x" type="image/webp"/><img class="section-hero__img" src="images/hero-img1@1x.png" srcset="images/hero-img1@2x.png 2x" alt=""/>
+						<source srcset="/images/hero-img1@1x.webp, /images/hero-img1@2x.webp 2x" type="image/webp"/><img class="section-hero__img" src="/images/hero-img1@1x.png" srcset="/images/hero-img1@2x.png 2x" alt=""/>
 					</picture>
 					<svg class="section-hero__waves">
 						<use xlink:href="#waves"></use>
@@ -32,7 +32,7 @@
 					<!-- Elem-->
 					<figure class="section-steps__elem step">
 						<picture>
-							<source srcset="images/steps-img1@1x.webp, images/steps-img1@2x.webp 2x" type="image/webp"/><img class="step__img" src="images/steps-img1@1x.png" srcset="images/steps-img1@2x.png 2x" alt=""/>
+							<source srcset="/images/steps-img1@1x.webp, /images/steps-img1@2x.webp 2x" type="image/webp"/><img class="step__img" src="/images/steps-img1@1x.png" srcset="/images/steps-img1@2x.png 2x" alt=""/>
 						</picture>
 						<figcaption>
 							<p class="step__text">Покупайте продукцию Крафт со знаком «Вкус путешествия с «Крафт»</p>
@@ -44,7 +44,7 @@
 					<!-- Elem-->
 					<figure class="section-steps__elem step">
 						<picture>
-							<source srcset="images/steps-img2@1x.webp, images/steps-img2@2x.webp 2x" type="image/webp"/><img class="step__img" src="images/steps-img2@1x.png" srcset="images/steps-img2@2x.png 2x" alt=""/>
+							<source srcset="/images/steps-img2@1x.webp, /images/steps-img2@2x.webp 2x" type="image/webp"/><img class="step__img" src="/images/steps-img2@1x.png" srcset="/images/steps-img2@2x.png 2x" alt=""/>
 						</picture>
 						<figcaption>
 							<p class="step__text">
@@ -59,7 +59,7 @@
 					<!-- Elem-->
 					<figure class="section-steps__elem step">
 						<picture>
-							<source srcset="images/steps-img3@1x.webp, images/steps-img3@2x.webp 2x" type="image/webp"/><img class="step__img" src="images/steps-img3@1x.png" srcset="images/steps-img3@2x.png 2x" alt=""/>
+							<source srcset="/images/steps-img3@1x.webp, /images/steps-img3@2x.webp 2x" type="image/webp"/><img class="step__img" src="/images/steps-img3@1x.png" srcset="/images/steps-img3@2x.png 2x" alt=""/>
 						</picture>
 						<figcaption>
 							<p class="step__text">Участвуйте в розыгрыше призов каждый день</p>

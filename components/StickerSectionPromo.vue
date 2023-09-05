@@ -31,9 +31,9 @@
 	import { useStore } from "vuex";
 	import { onMounted } from "vue";
 	const staticData = [
-		{srcset: "images/prize-img4@1x.webp, images/prize-img4@2x.webp 2x", srcimg: "images/prize-img4@1x.png"},
-		{srcset: "images/prize-img1@1x.webp, images/prize-img1@2x.webp 2x", srcimg: "images/prize-img1@1x.png"},
-		{srcset: "images/prize-img5@1x.webp, images/prize-img5@2x.webp 2x", srcimg: "images/prize-img5@1x.png"}
+		{srcset: "/images/prize-img4@1x.webp, /images/prize-img4@2x.webp 2x", srcimg: "/images/prize-img4@1x.png"},
+		{srcset: "/images/prize-img1@1x.webp, /images/prize-img1@2x.webp 2x", srcimg: "/images/prize-img1@1x.png"},
+		{srcset: "/images/prize-img5@1x.webp, /images/prize-img5@2x.webp 2x", srcimg: "/images/prize-img5@1x.png"}
 	] 
 	const store = useStore();
 	onMounted(()=>{
