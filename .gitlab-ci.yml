@@ -13,7 +13,7 @@ deploy_dev:
   stage: deploy
 
   script:
-    - ssh -o StrictHostKeyChecking=no $DEV_USER@$DEV_HOST "cd /home/kraft/www/promo-orenbeer.dreamdev.space &&
+    - ssh -o StrictHostKeyChecking=no $DEV_USER@$DEV_HOST "cd /home/kraft_front/www/front-promo-orenbeer.dreamdev.space &&
         git fetch origin &&
         git reset --hard origin/dev &&
         npm ci
