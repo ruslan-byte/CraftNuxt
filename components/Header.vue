@@ -14,7 +14,7 @@
 					<li class="header__nav-elem"><NuxtLink @click="closeBurgerMenu" class="header__nav-link" to="/">Правила и призы</NuxtLink></li>
 					<li class="header__nav-elem"><NuxtLink @click="closeBurgerMenu" class="header__nav-link" to="winners">Победители</NuxtLink></li>
 					<li class="header__nav-elem"><NuxtLink @click="closeBurgerMenu" class="header__nav-link" to="where-to-buy">Где купить</NuxtLink></li>
-					<li class="header__nav-elem"><NuxtLink @click="closeBurgerMenu" class="header__nav-link" data-modal="feedback">Обратная связь</NuxtLink></li>
+					<li class="header__nav-elem"><NuxtLink @click="closeBurgerMenu, showModal('feedback')" class="header__nav-link">Обратная связь</NuxtLink></li>
 				</ul>
 				<NuxtLink v-if="store.state.user.isLogin" to="/lk" class="header__user-nav header__user-nav--active header__user-nav--mobile">
 					<svg class="header__user-icon">
@@ -27,7 +27,7 @@
 					</div>
 				</NuxtLink>
 			</nav>
-			<div class="header__user-nav" v-if="!store.state.user.isLogin" data-modal="login">
+			<div class="header__user-nav" v-if="!store.state.user.isLogin" @click="showModal('login')">
 				<a class="header__lk-link" href="#">
 					<span class="header__lk-link-text">Личный кабинет</span>
 					<svg class="header__user-icon">
@@ -52,6 +52,7 @@
 	</header>
 </template>
 <script setup>
+	import { showModal } from '~/assets/js/components/modal.js';
 	import { ref, computed } from "vue"
 	import { useStore } from "vuex"
 	let store = useStore();

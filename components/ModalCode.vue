@@ -61,7 +61,7 @@
 								<a class="text-orange" href="#">авторизируйтесь на сайте</a>
 							</p>
 						</div>
-						<button class="modal__close js-modal-close">
+						<button class="modal__close js-modal-close" @click="closeModal">
 							<svg class="modal__close-icon">
 								<use xlink:href="#close"></use>
 							</svg>

@@ -40,7 +40,7 @@
 							</div>
 						</div>
 					</div>
-					<button class="modal__close js-modal-close">
+					<button class="modal__close" @click="closeModal">
 						<svg class="modal__close-icon">
 							<use xlink:href="#close"></use>
 						</svg>
@@ -50,13 +50,14 @@
 					<div class="modal__text-block" v-html="$store.state.modal.stikerData?.content">
 					</div>
 				</template>
-				<button class="button button--orange button--orange-md modal__btn js-modal-close">Отлично!</button>
+				<button class="button button--orange button--orange-md modal__btn" @click="closeModal">Отлично!</button>
 			</div>
 		</div>
 	</div>
   </div>
 </template>
 <script setup>
+	import { closeModal } from '~/assets/js/components/modal.js';
 	const runtimeConfig = useRuntimeConfig();
 </script>
 <style lang="scss">

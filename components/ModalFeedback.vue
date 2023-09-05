@@ -12,7 +12,7 @@
 				<h2 class="modal__title">Ваше сообщение успешно отправлено!</h2>
 				<p class="modal__subtitle">Наши менеджеры свяжутся с вами в ближайшее время</p>
 				<button
-					class="button button--orange button--orange-md modal__btn js-modal-close" 
+					class="button button--orange button--orange-md modal__btn" 
 					@click="reset"
 				>Отлично!</button>
 			</div>
@@ -26,7 +26,7 @@
 								<br class="hide-desktop">Напишите нам, и мы ответим в ближайшее время
 							</p>
 						</div>
-						<button class="modal__close js-modal-close">
+						<button class="modal__close" @click="closeModal">
 							<svg class="modal__close-icon">
 								<use xlink:href="#close"></use>
 							</svg>
@@ -94,6 +94,7 @@
 	</div>
 </template>
 <script setup>
+	import { closeModal } from '~/assets/js/components/modal.js';
 	import { ref } from "vue";
 	const runtimeConfig = useRuntimeConfig();
 	let isSuccess = ref(false),
@@ -175,6 +176,7 @@
 	}
 	function reset()
 	{
+		closeModal();
 		setTimeout( ()=>{
 			isSuccess.value = false;
 			data.value = {
