@@ -1,0 +1,23 @@
+stages:
+  - deploy
+
+before_script:
+  - apt-get update -qq
+  - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+  - eval $(ssh-agent -s)
+  - ssh-add <(echo "$SSH_PRIVATE_KEY")
+  - mkdir -p ~/.ssh
+  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+deploy_dev:
+  stage: deploy
+
+  script:
+    - ssh -o StrictHostKeyChecking=no $DEV_USER@$DEV_HOST "cd /home/kraft/www/promo-orenbeer.dreamdev.space &&
+        git fetch origin &&
+        git reset --hard origin/dev &&
+        npm ci
+        npm run generate"
+
+  only:
+    - dev
