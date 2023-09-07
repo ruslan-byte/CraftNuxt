@@ -8,14 +8,12 @@
 						<!-- Sticker-->
 						<figure class="sticker sticker--no-hover modal__sticker">
 							<picture>
-								<source srcset="/images/sticker5@1x.webp, /images/sticker5@2x.webp 2x" type="image/webp"/>
-									<img
-									{{$store.state.modal.stikerData}}
-										class="sticker__img"
-										src="/images/sticker5@1x.jpg"
-										:src="`${runtimeConfig.public.API_BASE_URL}${$store.state.modal.stikerData?.imageUrl}`"
-										alt=""
-									/>
+								<img
+									class="sticker__img"
+									:src="`${$store.state.modal.stikerData?.iconUrl}`"
+									alt=""
+								/>
+								{{$store.state.modal.stikerData}}
 							</picture>
 							<figcaption>
 								<p class="sticker__text">
