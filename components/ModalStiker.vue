@@ -6,14 +6,16 @@
 				<div class="modal__title-box">
 					<div class="modal__sticker-box">
 						<!-- Sticker-->
-						<figure class="sticker sticker--no-hover modal__sticker">
+						<figure
+							class="sticker sticker--no-hover modal__sticker"
+						 	v-if="$store.state.modal.stikerData?.iconUrl"
+						 >
 							<picture>
 								<img
 									class="sticker__img"
 									:src="`${$store.state.modal.stikerData?.iconUrl}`"
 									alt=""
 								/>
-								{{$store.state.modal.stikerData}}
 							</picture>
 							<figcaption>
 								<p class="sticker__text">

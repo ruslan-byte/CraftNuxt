@@ -55,8 +55,16 @@
 	import { showModal } from '~/assets/js/components/modal.js';
 	import { ref, computed } from "vue"
 	import { useStore } from "vuex"
+	import { useRouter, useRoute } from 'vue-router'
+	let router = useRouter();
+	let route = useRoute();
 	let store = useStore();
-	const exit = ()=>{store.dispatch('user/logOutOfTheSystem')};
+	const exit = ()=> {
+		store.dispatch('user/logOutOfTheSystem');
+		if(route.fullPath === "/lk")
+			router.push('/')
+		
+	};
 
 	const firstName = computed(() => {
 		return store.state.user.data.firstName === '' ? 'Имя' : store.state.user.data.firstName
