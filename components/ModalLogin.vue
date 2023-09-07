@@ -33,7 +33,10 @@
 								<input class="checkbox__input" type="checkbox" v-model="isConsentToDataProcessing">
 								<span class="checkbox__text">
 									Даю согласие на обработку
-									<a class="text-orange" href="#">персональных данных</a></span>
+									<NuxtLink class="text-orange" to="agreement" @click="closeModal();">
+									персональных данных</NuxtLink>
+								</span>
+
 							</label>
 						</div>
 						<button

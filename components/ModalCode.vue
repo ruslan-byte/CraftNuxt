@@ -37,7 +37,7 @@
 						</div>
 						<p class="modal__hint">Если у вас есть проблемы с регистрацией кодов,<br>пожалуйста,
 							
-							<a class="text-orange" href="#">напишите нам.</a>
+							<a class="text-orange" href="#" @click="openFeedbackModal">напишите нам.</a>
 						</p>
 					</div>
 					<button
@@ -58,7 +58,7 @@
 							<p class="modal__subtitle">Ищите код в продукции со знаком «Вкус путешествия с «Крафт»</p>
 							<p class="modal__subtitle">
 								Если ранее вы принимали участие в акции, то сначала
-								<a class="text-orange" href="#">авторизируйтесь на сайте</a>
+								<a class="text-orange" href="#" @click="openLoginModal">авторизируйтесь на сайте</a>
 							</p>
 						</div>
 						<button class="modal__close js-modal-close" @click="closeModal">
@@ -134,14 +134,17 @@
 							</div>
 							<p class="modal__hint">
 								Если вам не приходят коды по смс или есть другие проблемы с регистрацией кодов под крышкой, пожалуйста,
-								<a class="text-orange" href="#">напишите нам</a>.
+								<a class="text-orange" href="#" @click="openFeedbackModal">напишите нам</a>.
 							</p>
 						</div>
 					</div>
 					<label class="checkbox modal__checkbox">
 						<input class="checkbox__input" type="checkbox"><span class="checkbox__text">
 							Даю согласие на обработку
-							<a class="text-orange" href="#">персональных данных</a></span>
+							<NuxtLink class="text-orange" to="agreement" @click="closeModal();">
+							персональных данных</NuxtLink>
+
+						</span>
 					</label>
 					<button
 						class="button button--orange button--orange-md modal__btn" 
@@ -229,6 +232,17 @@
 	}
 	async function selectActiveCity(newCity){
 		activeCity.value = newCity;
+	}
+
+	function openLoginModal()
+	{
+		closeModal() 
+		showModal('login')
+	}
+	function openFeedbackModal()
+	{
+		closeModal() 
+		showModal('feedback')
 	}
 </script>
 <style  scoped>

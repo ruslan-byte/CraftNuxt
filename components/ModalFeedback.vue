@@ -83,7 +83,9 @@
 							<input class="checkbox__input" type="checkbox" v-model="data.isConsent.value">
 							<span class="checkbox__text">
 								Даю согласие на обработку
-								<a class="text-orange" href="#">персональных данных</a></span>
+								<NuxtLink class="text-orange" to="agreement" @click="closeModal();">
+								персональных данных</NuxtLink>
+							</span>
 							<span class="form-group__error-text" data-v-inspector="components/ModalUser.vue:20:97">Объязательное поле</span>
 						</label>
 						<button class="button button--orange button--orange-md modal__btn">Отправить</button>
@@ -210,7 +212,14 @@
 			telTarget.value.value = "+7"
 		}, 1000)
 	}
-	
+	import { useRouter } from 'vue-router';
+	const route = useRouter();
+	function openPagePalitic()
+	{
+		
+		route.push({ path: "/agreement" });
+		closeModal();
+	}
 </script>
 <style lang="scss">
 </style>
