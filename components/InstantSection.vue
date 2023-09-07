@@ -53,6 +53,7 @@
 		if(lottery.isParticipant)
 		{
 			store.commit('modal/setStickerData', lottery.stickers[0]);
+			store.commit('modal/setStickerWin', false);
 			showModal('sticker');
 		}
 	}

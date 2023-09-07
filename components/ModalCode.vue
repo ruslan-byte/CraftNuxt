@@ -210,6 +210,7 @@
 			{
 				isError.value = false;
 				store.commit('modal/setStickerData', json.userCode.sticker);
+				store.commit('modal/setStickerWin', true);
 				showStiker();
 				store.dispatch('user/loginInToSystem');
 			}

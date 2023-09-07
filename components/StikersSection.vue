@@ -79,6 +79,7 @@
 	{
 		if(stickerData.activatedCount){
 			store.commit('modal/setStickerData', stickerData);
+			store.commit('modal/setStickerWin', false);
 			showModal('sticker');
 		}
 	}

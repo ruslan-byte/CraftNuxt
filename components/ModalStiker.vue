@@ -5,7 +5,6 @@
 			<div class="modal__content">
 				<div class="modal__title-box">
 					<div class="modal__sticker-box">
-						<!-- Sticker-->
 						<figure
 							class="sticker sticker--no-hover modal__sticker"
 						 	v-if="$store.state.modal.stikerData?.iconUrl"
@@ -23,13 +22,24 @@
 								</p>
 							</figcaption>
 						</figure>
+
 						<div class="modal__wrap">
 							<h2 class="modal__title" v-if="$store.state.modal.stikerData?.id>12">
-								Поздравляем! Ваш мгновенный приз – {{$store.state.modal.stikerData?.name}}
+								<template v-if="$store.state.modal.isStikerWin">
+									Вы получили +50 баллов
+									<br>и стикер - приз 
+								</template>
+								{{$store.state.modal.stikerData?.name}}
 							</h2>
 							<template v-else>
-								<p class="modal__subtitle">Стикер</p>
-								<h2 class="modal__title">«{{$store.state.modal.stikerData?.name}}»</h2>
+								<template v-if="$store.state.modal.isStikerWin">
+									<h2 class="modal__title">Вы получили +50 баллов</h2>
+									<h2 class="modal__title">и стикер «{{$store.state.modal.stikerData?.name}}»</h2>
+								</template>
+								<template v-else>
+									<p class="modal__subtitle">Стикер</p>
+									<h2 class="modal__title">«{{$store.state.modal.stikerData?.name}}»</h2>
+								</template>
 							</template>
 							<div class="modal__info-box" v-if="$store.state.modal.stikerData?.extraText">
 								<svg class="modal__info-box-icon">
