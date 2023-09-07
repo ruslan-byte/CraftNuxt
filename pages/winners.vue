@@ -43,7 +43,7 @@
 </template>
 <script setup>
 	import { onMounted, ref } from "vue";
-	let countItems = ref(2);
+	let countItems = ref(8);
 	let lotteryWinners = ref([]);
 	let isListEnd = ref(false);
 	const runtimeConfig = useRuntimeConfig();
@@ -71,9 +71,8 @@
 	}
 	async function loadMore()
 	{
-		countItems.value += 2;
+		countItems.value += 8;
 		await fetchLotteryWinners();
-		console.log(allWinners.value);
 		isListEnd.value = !(countItems.value < allWinners.value);
 	}
 	
