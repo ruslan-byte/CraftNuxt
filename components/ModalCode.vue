@@ -211,6 +211,7 @@
 				isError.value = false;
 				store.commit('modal/setStickerData', json.userCode.sticker);
 				showStiker();
+				store.dispatch('user/loginInToSystem');
 			}
 			else isError.value = true;
 		})
