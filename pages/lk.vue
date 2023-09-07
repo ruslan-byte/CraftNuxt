@@ -30,13 +30,14 @@
 			<h2 class="section-lk-text__text" v-else>Желаем вам удачи!</h2>
 			<p class="section-lk-text__text">
 				Если остались вопросы —
-				<span class="text-orange">напишите нам</span>.
+				<span class="text-orange" @click="showModal('feedback')">напишите нам</span>.
 			</p>
 		</section>
 	</main>
 </template>
 <script setup>
-
+	import { closeModal, showModal } from '~/assets/js/components/modal.js';
 </script>
-<style lang="scss">
+<style scoped>
+	.text-orange {cursor: pointer}
 </style>
