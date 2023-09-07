@@ -65,7 +65,14 @@
 						<div class="modal__wrap">
 							<div class="form-group">
 								<label class="form-group__label form-group__label--small form-group__label--center">Введите код из SMS, который мы отправили 5 секунд назад</label>
-								<input class="form-group__input" type="text" name="code" placeholder="Код" v-model="code">
+								<input
+									class="form-group__input"
+									type="number"
+									name="code"
+									placeholder="Код"
+									v-model="code"
+
+								>
 							</div>
 							<p class="modal__hint">
 								Если код не пришёл, запросите
@@ -144,5 +151,16 @@
 		await store.dispatch('user/loginInToSystem');
 	}
 </script>
-<style lang="scss">
+<style>
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 </style>

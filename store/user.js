@@ -5,7 +5,7 @@ export default {
 		return {
 			isLogin: false,
 			login: {
-				step: 3,
+				step: 1,
 			},
 			data:{},
 			stikerList: [],
