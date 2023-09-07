@@ -106,10 +106,11 @@
 							</svg>
 							<p class="modal__success-text">Ваш номер телефона подтверждён!</p>
 						</div>
-						<button
+						<NuxtLink
+							to="lk"
 							class="button button--orange button--orange-md modal__btn"
 							@click="login">Войти
-						</button>
+						</NuxtLink>
 					</div>
 				</div>
 			</div>
