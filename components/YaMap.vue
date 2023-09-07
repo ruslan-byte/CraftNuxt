@@ -20,7 +20,7 @@
 				YaMap.init({
 					setting: {
 						center: [+this.point.lat, +this.point.lon],
-						zoom: 7
+						zoom: 15
 					}
 				})
 				YaMap.addPoint([+this.point.lat, +this.point.lon]);
