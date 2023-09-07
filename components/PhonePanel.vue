@@ -11,9 +11,10 @@
 						@input="inputNumber"
 					>
 				<button
-					class="button button--white form-group__confirm-btn"
+					class="button form-group__confirm-btn button--white"
 					@click="sendNumber"
 					type="button"
+					:disabled="isPhoneSend"
 				>Подтвердить</button>
 			</div>
 		</div>
@@ -25,6 +26,7 @@
 					@click="sendCode"
 					type="button"
 					class="button button--white form-group__confirm-btn"
+					:disabled="isCodeSend"
 				>
 				Отправить</button>
 			</div>
@@ -46,16 +48,34 @@
 	{
 		phoneNumber.value = target.value
 	};
+	const isPhoneSend = ref(false);
 	function sendNumber()
 	{
-		store.dispatch('user/fetchPhone', phoneNumber.value);
+		store.dispatch('user/fetchPhone', phoneNumber.value).then(async (response)=>{
+			let data = await response.json();
+			isPhoneSend.value = data.success;
+		});
 	};
+	const isCodeSend = ref(false);
 	async function sendCode()
 	{
 		let response = await store.dispatch('user/fetchUserCode', {phone: phoneNumber.value, code: code.value });
 		let data = await response.json()
+		isCodeSend.value = data.success;
 		emit('getToken', data.token);
 	};
+	function reset()
+	{
+		
+	}
 </script>
-<style lang="scss">
+<style >
+.button--white:disabled
+{
+	background: transparent;
+	user-select: none;
+	cursor: default;
+	color:#6F6F6F;
+	border: 1px solid #6F6F6F;
+}
 </style>
