@@ -132,7 +132,7 @@
 	onMounted(()=>{
 		getTopics();
 	});
-
+	
 	function submit()
 	{
 		if(validateData()){

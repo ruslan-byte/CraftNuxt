@@ -92,17 +92,20 @@
 							<p class="form-group__label">Город</p>
 							<div class="dropdown">
 								<div class="dropdown__value-box">
-									<input class="dropdown__value" type="text" placeholder="Выберите свой город" disabled>
+									<input class="dropdown__value" type="text" placeholder="Выберите свой город" disabled :value="activeCity?.name">
 									<svg class="dropdown__arrow">
 										<use xlink:href="#dropdown-arrow"></use>
 									</svg>
 								</div>
 								<ul class="dropdown__options-list">
-									<li class="dropdown__option" data-value="Оренбург">Оренбург</li>
-									<li class="dropdown__option" data-value="Москва">Москва</li>
-									<li class="dropdown__option" data-value="Санкт-Петербург">Санкт-Петербург</li>
-									<li class="dropdown__option" data-value="Казань">Казань</li>
-									<li class="dropdown__option" data-value="Новосибирск">Новосибирск</li>
+									<li
+										class="dropdown__option" 
+										v-for="city of cities"
+										:data-value="city?.name"
+										@click="selectActiveCity(city)"
+									>
+										{{city.name}}
+									</li>
 								</ul>
 							</div>
 						</div>
@@ -152,7 +155,7 @@
 	</div>
 </template>
 <script setup>
-	import { ref } from "vue"
+	import { ref, onMounted } from "vue"
 	import { useStore } from "vuex";
 	import { closeModal, showModal } from '~/assets/js/components/modal.js';
 	const runtimeConfig = useRuntimeConfig();
@@ -214,6 +217,20 @@
 		closeModal();
 		showModal('sticker');
 	}
+
+	onMounted(()=>{fetchCities()})
+	let cities = ref([]),
+		activeCity = ref();
+	function fetchCities(){
+		fetch( runtimeConfig.public.API_BASE_URL + '/cities/').then(async (response)=>{
+			let dataJson = await response.json();
+			cities.value = dataJson.cities;
+		})
+	}
+	async function selectActiveCity(newCity){
+		activeCity.value = newCity;
+	}
 </script>
-<style lang="scss">
+<style  scoped>
+.dropdown__options-list{max-height: 300px; overflow: auto;}
 </style>
