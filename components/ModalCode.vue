@@ -145,7 +145,7 @@
 					</label>
 					<button
 						class="button button--orange button--orange-md modal__btn" 
-						:disabled="!token || !!contentCode"
+						:disabled="!(token && contentCode)"
 					>
 						Отправить
 					</button>
