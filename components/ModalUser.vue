@@ -25,7 +25,6 @@
 									placeholder="Введите имя"
 									v-model="data.firstName"
 								>
-								<span class="form-group__error-text">Текст ошибки</span>
 							</div>
 							<div class="form-group">
 								<label class="form-group__label">Фамилия</label>
@@ -71,22 +70,14 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<p class="form-group__label">Город</p>
-								<div class="dropdown">
-									<div class="dropdown__value-box">
-										<input class="dropdown__value" type="text" placeholder="Выберите свой город" disabled>
-										<svg class="dropdown__arrow">
-											<use xlink:href="#dropdown-arrow"></use>
-										</svg>
-									</div>
-									<ul class="dropdown__options-list">
-										<li class="dropdown__option" data-value="Оренбург">Оренбург</li>
-										<li class="dropdown__option" data-value="Москва">Москва</li>
-										<li class="dropdown__option" data-value="Санкт-Петербург">Санкт-Петербург</li>
-										<li class="dropdown__option" data-value="Казань">Казань</li>
-										<li class="dropdown__option" data-value="Новосибирск">Новосибирск</li>
-									</ul>
-								</div>
+								<label class="form-group__label">Город</label>
+								<input
+									class="form-group__input"
+									type="text"
+									name="city"
+									placeholder="Введите город"
+									v-model="data.city"
+								>
 							</div>
 							<div class="form-group mb24">
 								<label class="form-group__label">Дата рождения</label>
@@ -141,6 +132,7 @@
 		dateOfBirth:  "",
 		email:  "",
 		gotEmailBonus: false,
+		city: ""
 	})
 	onMounted(()=>{
 		store.commit('modal/setDataFunc', setData);
@@ -166,6 +158,7 @@
 		data.value.dateOfBirth = store.state.user.data.dateOfBirth;
 		data.value.email = store.state.user.data.email;
 		data.value.gotEmailBonus = store.state.user.data.gotEmailBonus;
+		data.value.city = store.state.user.data.city;
 	}
 	async function submitData()
 	{
@@ -177,7 +170,8 @@
 				"lastName": data.value.lastName,
 				"sex": data.value.sex,
 				"dateOfBirth": dateInFormToSend.value,
-				"email": data.value.email
+				"email": data.value.email,
+				"city": data.value.city
 			}
 		)
 		
