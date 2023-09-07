@@ -71,7 +71,6 @@
 									name="code"
 									placeholder="Код"
 									v-model="code"
-
 								>
 							</div>
 							<p class="modal__hint">
