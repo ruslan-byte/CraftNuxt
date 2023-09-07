@@ -33,8 +33,8 @@
 						</button>
 					</div>
 					<form @submit.prevent="submit">
-						<div class="modal__wrap" :class="{'form-group--error': data.selectTopic.isEmpty}">
-							<div class="form-group">
+						<div class="modal__wrap">
+							<div class="form-group" :class="{'form-group--error': data.selectTopic.isEmpty}">
 								<p class="form-group__label">Тема вопроса</p>
 								<div class="dropdown" ref="dropdown">
 									<div class="dropdown__value-box">
@@ -168,6 +168,7 @@
 		data.value.phone.isEmpty = !data.value.phone.value; 
 		data.value.message.isEmpty = !data.value.message.value;
 		data.value.isConsent.isEmpty = !data.value.isConsent.value;
+		console.log(data.value.selectTopic.isEmpty, data.value.email.isEmpty, data.value.name.isEmpty, data.value.phone.isEmpty, data.value.message.isEmpty, data.value.isConsent.isEmpty);
 		return Object.values(data.value).reduce((accum, item)=> accum && !item.isEmpty, true)
 	}
 	function getTopics() {
