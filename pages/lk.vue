@@ -37,7 +37,15 @@
 </template>
 <script setup>
 	import { closeModal, showModal } from '~/assets/js/components/modal.js';
+	import {onMounted} from 'vue'
+	
+	onMounted(()=>{
+		if(!localStorage.getItem('userToken'))
+			navigateTo('/');
+
+	})
 </script>
 <style scoped>
 	.text-orange {cursor: pointer}
+
 </style>
