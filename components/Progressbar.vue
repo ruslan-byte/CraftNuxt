@@ -3,7 +3,7 @@
   	<div class="prize__progress">
 		<div class="prize__progress-value prize__progress-value--yellow" :style="`width:${proccess}%`"></div>
 	</div>
-	<p class="prize__progress-text">Необходимо ещё 100 баллов для участия</p>
+	<p class="prize__progress-text">Необходимо ещё {{this.minPoints - this.$store.state.user.data.loyalty_points}} баллов для участия</p>
   </div>
 </template>
 <script>
