@@ -89,26 +89,15 @@
 							>
 						</div>
 						<div class="form-group">
-							<p class="form-group__label">Город</p>
-							<div class="dropdown">
-								<div class="dropdown__value-box">
-									<input class="dropdown__value" type="text" placeholder="Выберите свой город" disabled :value="activeCity?.name">
-									<svg class="dropdown__arrow">
-										<use xlink:href="#dropdown-arrow"></use>
-									</svg>
-								</div>
-								<ul class="dropdown__options-list">
-									<li
-										class="dropdown__option" 
-										v-for="city of cities"
-										:data-value="city?.name"
-										@click="selectActiveCity(city)"
-									>
-										{{city.name}}
-									</li>
-								</ul>
+								<label class="form-group__label">Город</label>
+								<input
+									class="form-group__input"
+									type="text"
+									name="city"
+									placeholder="Введите город"
+									v-model="cityName"
+								>
 							</div>
-						</div>
 						<PhonePanel @getToken="setUserToken" />
 						<div class="modal__form-panel">
 							<div class="form-group">
@@ -168,7 +157,8 @@
 		token = ref(''),
 		firstName = ref(''),
 		lastName = ref(''),
-		email = ref('');
+		email = ref(''),
+		cityName = ref('');
 
 	function setUserToken(newToken)
 	{
@@ -185,7 +175,8 @@
 				"firstName": store.state.user.data.firstName,
 				"lastName": store.state.user.data.lastName,
 				"email": store.state.user.data.email,
-				"content": contentCode.value
+				"cityName": store.state.user.data.cityName,
+				"content": contentCode.value,
 			}
 		}
 		else
@@ -195,9 +186,11 @@
 				"firstName": firstName.value,
 				"lastName": lastName.value,
 				"email": email.value,
-				"content": contentCode.value
+				"content": contentCode.value,
+				"cityName": cityName.value,
 			}
 		}
+		console.log(sendData);
 		fetch(runtimeConfig.public.API_BASE_URL + '/code/?token=' + userToken, {
 			method: "POST",
 			headers: {
@@ -221,19 +214,6 @@
 	{
 		closeModal();
 		showModal('sticker');
-	}
-
-	onMounted(()=>{fetchCities()})
-	let cities = ref([]),
-		activeCity = ref();
-	function fetchCities(){
-		fetch( runtimeConfig.public.API_BASE_URL + '/cities/').then(async (response)=>{
-			let dataJson = await response.json();
-			cities.value = dataJson.cities;
-		})
-	}
-	async function selectActiveCity(newCity){
-		activeCity.value = newCity;
 	}
 
 	function openLoginModal()
