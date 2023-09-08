@@ -5,11 +5,10 @@ export function dateInit()
 {
 	if(process.browser)
 	{
-		const dateInputList = document.querySelectorAll('.form-group__input--date')
+		const dateInputList = document.querySelectorAll('._date')
 	
 		if (dateInputList.length) {
 			dateInputList.forEach((dateInput) => {
-				
 				flatpickr(dateInput, {
 					"locale": Russian,
 					dateFormat: "d.m.Y",
