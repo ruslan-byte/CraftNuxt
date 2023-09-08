@@ -120,6 +120,7 @@
 </template>
 <script setup>
 	import { closeModal } from '~/assets/js/components/modal.js'
+	import { dateInit } from '~/assets/js/components/data.js'
 	import { computed, ref, onMounted } from "vue"
 	import { useStore } from "vuex";
 	const store = useStore();
@@ -136,6 +137,7 @@
 	})
 	onMounted(()=>{
 		store.commit('modal/setDataFunc', setData);
+		dateInit();
 	})
 
 	const phone = computed(() => {
