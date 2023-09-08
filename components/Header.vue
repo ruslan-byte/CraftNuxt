@@ -16,7 +16,7 @@
 					<li class="header__nav-elem"><NuxtLink @click="closeBurgerMenu" class="header__nav-link" to="where-to-buy">Где купить</NuxtLink></li>
 					<li class="header__nav-elem"><NuxtLink @click="closeBurgerMenu, showModal('feedback')" class="header__nav-link">Обратная связь</NuxtLink></li>
 				</ul>
-				<NuxtLink v-if="store.state.user.isLogin" to="/lk" class="header__user-nav header__user-nav--active header__user-nav--mobile">
+				<NuxtLink v-if="store.state.user.isLogin" to="/lk" class="header__user-nav header__user-nav--active header__user-nav--mobile" @click="closeBurgerMenu">
 					<svg class="header__user-icon">
 						<use xlink:href="#user-icon"></use>
 					</svg>
@@ -35,7 +35,11 @@
 					</svg>
 				</a>
 			</div>
-			<NuxtLink to="/lk" class="header__user-nav header__user-nav--active" v-else>
+			<NuxtLink
+				to="/lk"
+				class="header__user-nav header__user-nav--active"
+				v-else
+			>
 				<div class="header__user-nav-box">
 					<p class="header__user-name">
 						{{firstName}}

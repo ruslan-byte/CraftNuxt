@@ -44,7 +44,6 @@
 	import { sliderInit } from "~/assets/js/components/slider";
 	import { staticData } from "~/assets/json/intantStikerStatic";
 
-	const sliderSection = ref('sliderSection');
 
 	onMounted( async ()=>{
 		await useStore().dispatch('lottery/fetchInstantLottery');
