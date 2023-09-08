@@ -158,7 +158,7 @@
 		data.value.dateOfBirth = store.state.user.data.dateOfBirth;
 		data.value.email = store.state.user.data.email;
 		data.value.gotEmailBonus = store.state.user.data.gotEmailBonus;
-		data.value.city = store.state.user.data.city;
+		data.value.city = store.state.user.data.cityName;
 	}
 	async function submitData()
 	{
@@ -171,7 +171,7 @@
 				"sex": data.value.sex,
 				"dateOfBirth": dateInFormToSend.value,
 				"email": data.value.email,
-				"city": data.value.city
+				"cityName": data.value.city
 			}
 		)
 		
