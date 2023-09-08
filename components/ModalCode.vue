@@ -190,7 +190,6 @@
 				"cityName": cityName.value,
 			}
 		}
-		console.log(sendData);
 		fetch(runtimeConfig.public.API_BASE_URL + '/code/?token=' + userToken, {
 			method: "POST",
 			headers: {
@@ -210,8 +209,11 @@
 			else isError.value = true;
 		})
 	}
+	import { useRouter } from 'vue-router'
+	let router = useRouter();
 	function showStiker()
 	{
+		router.push('/lk')
 		closeModal();
 		showModal('sticker');
 	}
