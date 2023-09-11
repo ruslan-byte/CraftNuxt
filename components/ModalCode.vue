@@ -17,7 +17,7 @@
 							<h2 class="modal__title">Зарегистрировать код</h2>
 							<p class="modal__subtitle">Ищите код в продукции со знаком<br>«Вкус путешествия с «Крафт»</p>
 						</div>
-						<button class="modal__close" @click="closeModal">
+						<button class="modal__close" @click="closeThisModal">
 							<svg class="modal__close-icon">
 								<use xlink:href="#close"></use>
 							</svg>
@@ -61,7 +61,7 @@
 								<a class="text-orange" href="#" @click="openLoginModal">авторизируйтесь на сайте</a>
 							</p>
 						</div>
-						<button class="modal__close js-modal-close" @click="closeModal">
+						<button class="modal__close js-modal-close" @click="closeThisModal">
 							<svg class="modal__close-icon">
 								<use xlink:href="#close"></use>
 							</svg>
@@ -130,7 +130,7 @@
 					<label class="checkbox modal__checkbox">
 						<input class="checkbox__input" type="checkbox"><span class="checkbox__text">
 							Даю согласие на обработку
-							<NuxtLink class="text-orange" to="agreement" @click="closeModal();">
+							<NuxtLink class="text-orange" to="agreement" @click="closeThisModal()">
 							персональных данных</NuxtLink>
 
 						</span>
@@ -214,20 +214,36 @@
 	function showStiker()
 	{
 		router.push('/lk')
-		closeModal();
+		closeThisModal();
 		showModal('sticker');
 	}
 
 	function openLoginModal()
 	{
-		closeModal() 
+		closeThisModal() 
 		showModal('login')
 	}
 	function openFeedbackModal()
 	{
-		closeModal() 
+		closeThisModal() 
 		showModal('feedback')
 	}
+	function resetData()
+	{
+		contentCode.value = "";
+		isError.value = false;
+		token.value = "";
+		firstName.value = "";
+		lastName.value = "";
+		email.value = "";
+		cityName.value = "";
+	}
+	function closeThisModal()
+	{
+		closeModal();
+		setTimeout(resetData, 500);
+	}
+	
 </script>
 <style  scoped>
 .dropdown__options-list{max-height: 300px; overflow: auto;}

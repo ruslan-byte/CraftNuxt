@@ -26,7 +26,7 @@
 								<br class="hide-desktop">Напишите нам, и мы ответим в ближайшее время
 							</p>
 						</div>
-						<button class="modal__close" @click="closeModal">
+						<button class="modal__close" @click="reset">
 							<svg class="modal__close-icon">
 								<use xlink:href="#close"></use>
 							</svg>
@@ -83,7 +83,7 @@
 							<input class="checkbox__input" type="checkbox" v-model="data.isConsent.value">
 							<span class="checkbox__text">
 								Даю согласие на обработку
-								<NuxtLink class="text-orange" to="agreement" @click="closeModal();">
+								<NuxtLink class="text-orange" to="agreement" @click="reset();">
 								персональных данных</NuxtLink>
 							</span>
 							<span class="form-group__error-text" data-v-inspector="components/ModalUser.vue:20:97">Объязательное поле</span>
@@ -219,7 +219,7 @@
 	{
 		
 		route.push({ path: "/agreement" });
-		closeModal();
+		reset();
 	}
 </script>
 <style lang="scss">
