@@ -29,7 +29,13 @@
 									</picture>
 								</div>
 								<figcaption class="instant-card__text">{{lottery.name}}
-								<span class="instant-card__counter" v-if="lottery.activatedCount">{{lottery.activatedCount}}</span></figcaption>
+									<span 
+										class="instant-card__counter"
+										v-if="lottery.stickers[0].activatedCount"
+									>
+										{{lottery.stickers[0].activatedCount}}
+									</span>
+								</figcaption>
 							</figure>
 						</div>
 					</template>

@@ -154,7 +154,6 @@
 	function resetFormData()
 	{
 		telIntpur.value.value ='+7'
-		inputMask.updateValue('+')
 		store.commit('user/setLoginStep', 1);
 		phoneNumber.value = '';
 		code.value = '';
