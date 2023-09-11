@@ -22,6 +22,7 @@
 							<div class="form-group">
 								<label class="form-group__label form-group__label--center">Введите свой номер телефона</label>
 								<input
+									ref="telIntpur"
 									class="form-group__input"
 									type="tel"
 									name="phone"
@@ -127,11 +128,11 @@
 	import { ref } from "vue"
 	import { useStore } from "vuex";
 	import { closeModal } from "~/assets/js/components/modal" 
-
 	const store = useStore();
 	let phoneNumber = ref('');
 	let code = ref('');
 	let isConsentToDataProcessing = ref(true);
+	let telIntpur = ref(null);
 	function inputNumber ({target})
 	{
 		phoneNumber.value = target.value
@@ -148,6 +149,16 @@
 	{
 		closeModal();
 		await store.dispatch('user/loginInToSystem');
+		setTimeout(resetFormData, 1000)
+	}
+	function resetFormData()
+	{
+		telIntpur.value.value ='+7'
+		inputMask.updateValue('+')
+		store.commit('user/setLoginStep', 1);
+		phoneNumber.value = '';
+		code.value = '';
+		isConsentToDataProcessing.value = true;
 	}
 </script>
 <style>

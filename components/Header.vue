@@ -64,6 +64,7 @@
 	let route = useRoute();
 	let store = useStore();
 	const exit = ()=> {
+
 		store.dispatch('user/logOutOfTheSystem');
 		if(route.fullPath === "/lk")
 			router.push('/')
