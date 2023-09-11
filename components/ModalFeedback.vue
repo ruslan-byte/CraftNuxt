@@ -26,15 +26,15 @@
 								<br class="hide-desktop">Напишите нам, и мы ответим в ближайшее время
 							</p>
 						</div>
-						<button class="modal__close" @click="closeModal">
+						<button class="modal__close" @click="reset">
 							<svg class="modal__close-icon">
 								<use xlink:href="#close"></use>
 							</svg>
 						</button>
 					</div>
 					<form @submit.prevent="submit">
-						<div class="modal__wrap" :class="{'form-group--error': data.selectTopic.isEmpty}">
-							<div class="form-group">
+						<div class="modal__wrap">
+							<div class="form-group" :class="{'form-group--error': data.selectTopic.isEmpty}">
 								<p class="form-group__label">Тема вопроса</p>
 								<div class="dropdown" ref="dropdown">
 									<div class="dropdown__value-box">
@@ -83,7 +83,9 @@
 							<input class="checkbox__input" type="checkbox" v-model="data.isConsent.value">
 							<span class="checkbox__text">
 								Даю согласие на обработку
-								<a class="text-orange" href="#">персональных данных</a></span>
+								<NuxtLink class="text-orange" to="agreement" @click="reset();">
+								персональных данных</NuxtLink>
+							</span>
 							<span class="form-group__error-text" data-v-inspector="components/ModalUser.vue:20:97">Объязательное поле</span>
 						</label>
 						<button class="button button--orange button--orange-md modal__btn">Отправить</button>
@@ -132,7 +134,7 @@
 	onMounted(()=>{
 		getTopics();
 	});
-
+	
 	function submit()
 	{
 		if(validateData()){
@@ -166,6 +168,7 @@
 		data.value.phone.isEmpty = !data.value.phone.value; 
 		data.value.message.isEmpty = !data.value.message.value;
 		data.value.isConsent.isEmpty = !data.value.isConsent.value;
+		console.log(data.value.selectTopic.isEmpty, data.value.email.isEmpty, data.value.name.isEmpty, data.value.phone.isEmpty, data.value.message.isEmpty, data.value.isConsent.isEmpty);
 		return Object.values(data.value).reduce((accum, item)=> accum && !item.isEmpty, true)
 	}
 	function getTopics() {
@@ -210,7 +213,14 @@
 			telTarget.value.value = "+7"
 		}, 1000)
 	}
-	
+	import { useRouter } from 'vue-router';
+	const route = useRouter();
+	function openPagePalitic()
+	{
+		
+		route.push({ path: "/agreement" });
+		reset();
+	}
 </script>
 <style lang="scss">
 </style>

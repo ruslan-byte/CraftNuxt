@@ -25,7 +25,6 @@
 									placeholder="Введите имя"
 									v-model="data.firstName"
 								>
-								<span class="form-group__error-text">Текст ошибки</span>
 							</div>
 							<div class="form-group">
 								<label class="form-group__label">Фамилия</label>
@@ -71,27 +70,19 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<p class="form-group__label">Город</p>
-								<div class="dropdown">
-									<div class="dropdown__value-box">
-										<input class="dropdown__value" type="text" placeholder="Выберите свой город" disabled>
-										<svg class="dropdown__arrow">
-											<use xlink:href="#dropdown-arrow"></use>
-										</svg>
-									</div>
-									<ul class="dropdown__options-list">
-										<li class="dropdown__option" data-value="Оренбург">Оренбург</li>
-										<li class="dropdown__option" data-value="Москва">Москва</li>
-										<li class="dropdown__option" data-value="Санкт-Петербург">Санкт-Петербург</li>
-										<li class="dropdown__option" data-value="Казань">Казань</li>
-										<li class="dropdown__option" data-value="Новосибирск">Новосибирск</li>
-									</ul>
-								</div>
+								<label class="form-group__label">Город</label>
+								<input
+									class="form-group__input"
+									type="text"
+									name="city"
+									placeholder="Введите город"
+									v-model="data.city"
+								>
 							</div>
 							<div class="form-group mb24">
 								<label class="form-group__label">Дата рождения</label>
 								<input
-									class="form-group__input form-group__input--date"
+									class="form-group__input _date"
 									type="text"
 									name="first-name"
 									v-model.lazy="data.dateOfBirth"
@@ -129,6 +120,7 @@
 </template>
 <script setup>
 	import { closeModal } from '~/assets/js/components/modal.js'
+	import { dateInit } from '~/assets/js/components/date.js'
 	import { computed, ref, onMounted } from "vue"
 	import { useStore } from "vuex";
 	const store = useStore();
@@ -141,9 +133,11 @@
 		dateOfBirth:  "",
 		email:  "",
 		gotEmailBonus: false,
+		city: ""
 	})
 	onMounted(()=>{
 		store.commit('modal/setDataFunc', setData);
+		dateInit();
 	})
 
 	const phone = computed(() => {
@@ -155,17 +149,25 @@
 		else
 			return '-';
 	});
-	const dateInFormToSend = computed(() => {
-		return data.value.dateOfBirth.replaceAll('.', '-');
-	});
+	const dateCorrect = (date) => {
+		let dateObj = date.split('.');
+		return `${dateObj[0]}-${dateObj[1]}-${dateObj[2]}`
+	};
+	const dateForVisible = (date) =>
+	{
+		let dateObj = date.split('-');
+		console.log(dateObj);
+		return `${dateObj[2]}.${dateObj[1]}.${dateObj[0]}`
+	}
 	function setData()
 	{
 		data.value.firstName = store.state.user.data.firstName;
 		data.value.lastName = store.state.user.data.lastName;
 		data.value.sex = store.state.user.data.sex;
-		data.value.dateOfBirth = store.state.user.data.dateOfBirth;
+		data.value.dateOfBirth = dateForVisible(store.state.user.data.dateOfBirth);
 		data.value.email = store.state.user.data.email;
 		data.value.gotEmailBonus = store.state.user.data.gotEmailBonus;
+		data.value.city = store.state.user.data.cityName;
 	}
 	async function submitData()
 	{
@@ -176,8 +178,9 @@
 				"firstName": data.value.firstName,
 				"lastName": data.value.lastName,
 				"sex": data.value.sex,
-				"dateOfBirth": dateInFormToSend.value,
-				"email": data.value.email
+				"dateOfBirth": dateCorrect(data.value.dateOfBirth),
+				"email": data.value.email,
+				"cityName": data.value.city
 			}
 		)
 		

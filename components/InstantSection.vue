@@ -9,7 +9,7 @@
 			<p class="section-instant__text"><span class="text-orange">ПОКУПАЙТЕ БОЛЬШЕ</span>
 				продукции и получите шанс выиграть мгновенные призы
 			</p>
-			<div class="swiper section-instant__slider-elem">
+			<div class="swiper section-instant__slider-elem" id="instant-slider">
 				<div class="swiper-wrapper section-instant__grid">
 					<template v-for="(lottery, index) of $store.state.lottery.instant" >
 						<div class="section-instant__grid-col swiper-slide">
@@ -29,7 +29,13 @@
 									</picture>
 								</div>
 								<figcaption class="instant-card__text">{{lottery.name}}
-								<span class="instant-card__counter" v-if="lottery.activatedCount">{{lottery.activatedCount}}</span></figcaption>
+									<span 
+										class="instant-card__counter"
+										v-if="lottery.stickers[0].activatedCount"
+									>
+										{{lottery.stickers[0].activatedCount}}
+									</span>
+								</figcaption>
 							</figure>
 						</div>
 					</template>
@@ -43,9 +49,12 @@
 	import { useStore } from 'vuex';
 	import { staticData } from "~/assets/json/intantStikerStatic";
 	import { onMounted } from "vue"; 
+	import { sliderInit } from "~/assets/js/components/slider";
 	const store = useStore();
 	onMounted(()=>{
 		store.dispatch('lottery/fetchInstantLottery');
+		if(window.innerWidth < 1024)
+			sliderInit('instant-slider');
 	})
 	function openStickerDetail(lottery)
 	{
@@ -53,6 +62,7 @@
 		if(lottery.isParticipant)
 		{
 			store.commit('modal/setStickerData', lottery.stickers[0]);
+			store.commit('modal/setStickerWin', false);
 			showModal('sticker');
 		}
 	}

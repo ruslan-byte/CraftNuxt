@@ -16,7 +16,7 @@
 					<li class="header__nav-elem"><NuxtLink @click="closeBurgerMenu" class="header__nav-link" to="where-to-buy">Где купить</NuxtLink></li>
 					<li class="header__nav-elem"><NuxtLink @click="closeBurgerMenu, showModal('feedback')" class="header__nav-link">Обратная связь</NuxtLink></li>
 				</ul>
-				<NuxtLink v-if="store.state.user.isLogin" to="/lk" class="header__user-nav header__user-nav--active header__user-nav--mobile">
+				<NuxtLink v-if="store.state.user.isLogin" to="/lk" class="header__user-nav header__user-nav--active header__user-nav--mobile" @click="closeBurgerMenu">
 					<svg class="header__user-icon">
 						<use xlink:href="#user-icon"></use>
 					</svg>
@@ -35,7 +35,11 @@
 					</svg>
 				</a>
 			</div>
-			<NuxtLink to="/lk" class="header__user-nav header__user-nav--active" v-else>
+			<NuxtLink
+				to="/lk"
+				class="header__user-nav header__user-nav--active"
+				v-else
+			>
 				<div class="header__user-nav-box">
 					<p class="header__user-name">
 						{{firstName}}
@@ -55,8 +59,17 @@
 	import { showModal } from '~/assets/js/components/modal.js';
 	import { ref, computed } from "vue"
 	import { useStore } from "vuex"
+	import { useRouter, useRoute } from 'vue-router'
+	let router = useRouter();
+	let route = useRoute();
 	let store = useStore();
-	const exit = ()=>{store.dispatch('user/logOutOfTheSystem')};
+	const exit = ()=> {
+
+		store.dispatch('user/logOutOfTheSystem');
+		if(route.fullPath === "/lk")
+			router.push('/')
+		
+	};
 
 	const firstName = computed(() => {
 		return store.state.user.data.firstName === '' ? 'Имя' : store.state.user.data.firstName
@@ -67,17 +80,14 @@
 
 	function closeBurgerMenu()
 	{
-		if(process.browser){
+		if(process.browser && window.innerWidth < 1024){
 			let header = document.querySelector('.header');
 			header.classList.add('header--menu-animate')
 			setTimeout(() => {
 				if (header.classList.contains('header--menu-show')) {
 					header.classList.remove('header--menu-show')
 					document.body.style.overflow = ''
-				} else {
-					header.classList.add('header--menu-show')
-					document.body.style.overflow = 'hidden'
-				}
+				} 
 				setTimeout(() => {
 					header.classList.remove('header--menu-animate')
 				}, 300)

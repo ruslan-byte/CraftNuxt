@@ -49,10 +49,19 @@
 	<div class="data-card__score-row">
 		<p class="data-card__score"><span class="data-card__score-value">
 			{{store.state.user.data.loyalty_points}}
-		</span>Баллов</p>
+		</span>
+		<template v-if="store.state.user.data.loyalty_points === 1">Балл</template>
+		<template v-else-if="store.state.user.data.loyalty_points < 5 && store.state.user.data.loyalty_points !== 0">Балла</template>
+		<template v-else>Баллов</template>
+			
+		</p>
 		<p class="data-card__score"><span class="data-card__score-value">
 			{{store.getters['user/getStikerCount']}}
-		</span>Стикеров</p>
+		</span>
+		<template v-if="store.getters['user/getStikerCount'] === 1">Стикер</template>
+		<template v-else-if="store.getters['user/getStikerCount'] < 5 && store.getters['user/getStikerCount'] !== 0">Стикера</template>
+		<template v-else>Стикеров</template>
+	</p>
 	</div>
 </div>
 </template>

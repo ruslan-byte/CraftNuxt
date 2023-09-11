@@ -22,6 +22,7 @@
 							<div class="form-group">
 								<label class="form-group__label form-group__label--center">Введите свой номер телефона</label>
 								<input
+									ref="telIntpur"
 									class="form-group__input"
 									type="tel"
 									name="phone"
@@ -33,7 +34,10 @@
 								<input class="checkbox__input" type="checkbox" v-model="isConsentToDataProcessing">
 								<span class="checkbox__text">
 									Даю согласие на обработку
-									<a class="text-orange" href="#">персональных данных</a></span>
+									<NuxtLink class="text-orange" to="agreement" @click="closeModal();">
+									персональных данных</NuxtLink>
+								</span>
+
 							</label>
 						</div>
 						<button
@@ -62,7 +66,13 @@
 						<div class="modal__wrap">
 							<div class="form-group">
 								<label class="form-group__label form-group__label--small form-group__label--center">Введите код из SMS, который мы отправили 5 секунд назад</label>
-								<input class="form-group__input" type="text" name="code" placeholder="Код" v-model="code">
+								<input
+									class="form-group__input"
+									type="number"
+									name="code"
+									placeholder="Код"
+									v-model="code"
+								>
 							</div>
 							<p class="modal__hint">
 								Если код не пришёл, запросите
@@ -103,10 +113,11 @@
 							</svg>
 							<p class="modal__success-text">Ваш номер телефона подтверждён!</p>
 						</div>
-						<button
+						<NuxtLink
+							to="lk"
 							class="button button--orange button--orange-md modal__btn"
 							@click="login">Войти
-						</button>
+						</NuxtLink>
 					</div>
 				</div>
 			</div>
@@ -117,11 +128,11 @@
 	import { ref } from "vue"
 	import { useStore } from "vuex";
 	import { closeModal } from "~/assets/js/components/modal" 
-
 	const store = useStore();
 	let phoneNumber = ref('');
 	let code = ref('');
 	let isConsentToDataProcessing = ref(true);
+	let telIntpur = ref(null);
 	function inputNumber ({target})
 	{
 		phoneNumber.value = target.value
@@ -138,7 +149,27 @@
 	{
 		closeModal();
 		await store.dispatch('user/loginInToSystem');
+		setTimeout(resetFormData, 1000)
+	}
+	function resetFormData()
+	{
+		telIntpur.value.value ='+7'
+		store.commit('user/setLoginStep', 1);
+		phoneNumber.value = '';
+		code.value = '';
+		isConsentToDataProcessing.value = true;
 	}
 </script>
-<style lang="scss">
+<style>
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 </style>

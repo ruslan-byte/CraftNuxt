@@ -46,12 +46,24 @@
 	let countItems = ref(8);
 	let lotteryWinners = ref([]);
 	let isListEnd = ref(false);
-	onMounted(()=>{
-		fetchLotteryWinners();
+	const runtimeConfig = useRuntimeConfig();
+	onMounted(async()=>{
+		await fetchLotteryWinners();
+		await fetchAllWinners();
+		isListEnd.value = !(countItems.value < allWinners.value);
 	});
+	let allWinners = ref(0);
+	async function fetchAllWinners()
+	{
+		await fetch(runtimeConfig.public.API_BASE_URL + `/lottery-winners/?page=1`)
+		.then(async (res)=>{
+			let data = await res.json();
+			allWinners.value = data.lotteryWinners.length;
+		})
+	}
 	async function fetchLotteryWinners()
 	{
-		await fetch(`https://promo-orenbeer.dreamdev.space/lottery-winners/?page=1&per_page=${countItems.value}`)
+		await fetch(runtimeConfig.public.API_BASE_URL + `/lottery-winners/?page=1&per_page=${countItems.value}`)
 		.then(async (res)=>{
 			let data = await res.json();
 			lotteryWinners.value = data.lotteryWinners;
@@ -61,7 +73,7 @@
 	{
 		countItems.value += 8;
 		await fetchLotteryWinners();
-		isListEnd.value = !(countItems.value <= lotteryWinners.value.length);
+		isListEnd.value = !(countItems.value < allWinners.value);
 	}
 	
 </script>

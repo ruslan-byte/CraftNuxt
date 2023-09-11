@@ -17,7 +17,7 @@
 							<h2 class="modal__title">Зарегистрировать код</h2>
 							<p class="modal__subtitle">Ищите код в продукции со знаком<br>«Вкус путешествия с «Крафт»</p>
 						</div>
-						<button class="modal__close" @click="closeModal">
+						<button class="modal__close" @click="closeThisModal">
 							<svg class="modal__close-icon">
 								<use xlink:href="#close"></use>
 							</svg>
@@ -37,7 +37,7 @@
 						</div>
 						<p class="modal__hint">Если у вас есть проблемы с регистрацией кодов,<br>пожалуйста,
 							
-							<a class="text-orange" href="#">напишите нам.</a>
+							<a class="text-orange" href="#" @click="openFeedbackModal">напишите нам.</a>
 						</p>
 					</div>
 					<button
@@ -58,10 +58,10 @@
 							<p class="modal__subtitle">Ищите код в продукции со знаком «Вкус путешествия с «Крафт»</p>
 							<p class="modal__subtitle">
 								Если ранее вы принимали участие в акции, то сначала
-								<a class="text-orange" href="#">авторизируйтесь на сайте</a>
+								<a class="text-orange" href="#" @click="openLoginModal">авторизируйтесь на сайте</a>
 							</p>
 						</div>
-						<button class="modal__close js-modal-close" @click="closeModal">
+						<button class="modal__close js-modal-close" @click="closeThisModal">
 							<svg class="modal__close-icon">
 								<use xlink:href="#close"></use>
 							</svg>
@@ -89,23 +89,15 @@
 							>
 						</div>
 						<div class="form-group">
-							<p class="form-group__label">Город</p>
-							<div class="dropdown">
-								<div class="dropdown__value-box">
-									<input class="dropdown__value" type="text" placeholder="Выберите свой город" disabled>
-									<svg class="dropdown__arrow">
-										<use xlink:href="#dropdown-arrow"></use>
-									</svg>
-								</div>
-								<ul class="dropdown__options-list">
-									<li class="dropdown__option" data-value="Оренбург">Оренбург</li>
-									<li class="dropdown__option" data-value="Москва">Москва</li>
-									<li class="dropdown__option" data-value="Санкт-Петербург">Санкт-Петербург</li>
-									<li class="dropdown__option" data-value="Казань">Казань</li>
-									<li class="dropdown__option" data-value="Новосибирск">Новосибирск</li>
-								</ul>
+								<label class="form-group__label">Город</label>
+								<input
+									class="form-group__input"
+									type="text"
+									name="city"
+									placeholder="Введите город"
+									v-model="cityName"
+								>
 							</div>
-						</div>
 						<PhonePanel @getToken="setUserToken" />
 						<div class="modal__form-panel">
 							<div class="form-group">
@@ -131,18 +123,21 @@
 							</div>
 							<p class="modal__hint">
 								Если вам не приходят коды по смс или есть другие проблемы с регистрацией кодов под крышкой, пожалуйста,
-								<a class="text-orange" href="#">напишите нам</a>.
+								<a class="text-orange" href="#" @click="openFeedbackModal">напишите нам</a>.
 							</p>
 						</div>
 					</div>
 					<label class="checkbox modal__checkbox">
 						<input class="checkbox__input" type="checkbox"><span class="checkbox__text">
 							Даю согласие на обработку
-							<a class="text-orange" href="#">персональных данных</a></span>
+							<NuxtLink class="text-orange" to="agreement" @click="closeThisModal()">
+							персональных данных</NuxtLink>
+
+						</span>
 					</label>
 					<button
 						class="button button--orange button--orange-md modal__btn" 
-						:disabled="!token || !!contentCode"
+						:disabled="!(token && contentCode)"
 					>
 						Отправить
 					</button>
@@ -152,7 +147,7 @@
 	</div>
 </template>
 <script setup>
-	import { ref } from "vue"
+	import { ref, onMounted } from "vue"
 	import { useStore } from "vuex";
 	import { closeModal, showModal } from '~/assets/js/components/modal.js';
 	const runtimeConfig = useRuntimeConfig();
@@ -162,7 +157,8 @@
 		token = ref(''),
 		firstName = ref(''),
 		lastName = ref(''),
-		email = ref('');
+		email = ref(''),
+		cityName = ref('');
 
 	function setUserToken(newToken)
 	{
@@ -179,7 +175,8 @@
 				"firstName": store.state.user.data.firstName,
 				"lastName": store.state.user.data.lastName,
 				"email": store.state.user.data.email,
-				"content": contentCode.value
+				"cityName": store.state.user.data.cityName,
+				"content": contentCode.value,
 			}
 		}
 		else
@@ -189,7 +186,8 @@
 				"firstName": firstName.value,
 				"lastName": lastName.value,
 				"email": email.value,
-				"content": contentCode.value
+				"content": contentCode.value,
+				"cityName": cityName.value,
 			}
 		}
 		fetch(runtimeConfig.public.API_BASE_URL + '/code/?token=' + userToken, {
@@ -204,16 +202,49 @@
 			{
 				isError.value = false;
 				store.commit('modal/setStickerData', json.userCode.sticker);
+				store.commit('modal/setStickerWin', true);
 				showStiker();
+				store.dispatch('user/loginInToSystem');
 			}
 			else isError.value = true;
 		})
 	}
+	import { useRouter } from 'vue-router'
+	let router = useRouter();
 	function showStiker()
 	{
-		closeModal();
+		router.push('/lk')
+		closeThisModal();
 		showModal('sticker');
 	}
+
+	function openLoginModal()
+	{
+		closeThisModal() 
+		showModal('login')
+	}
+	function openFeedbackModal()
+	{
+		closeThisModal() 
+		showModal('feedback')
+	}
+	function resetData()
+	{
+		contentCode.value = "";
+		isError.value = false;
+		token.value = "";
+		firstName.value = "";
+		lastName.value = "";
+		email.value = "";
+		cityName.value = "";
+	}
+	function closeThisModal()
+	{
+		closeModal();
+		setTimeout(resetData, 500);
+	}
+	
 </script>
-<style lang="scss">
+<style  scoped>
+.dropdown__options-list{max-height: 300px; overflow: auto;}
 </style>
