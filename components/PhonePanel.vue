@@ -14,14 +14,14 @@
 					class="button form-group__confirm-btn button--white"
 					@click="sendNumber"
 					type="button"
-					:disabled="isPhoneSend"
+					:disabled="isPhoneButtonDisabled"
 				>Подтвердить</button>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group" :class="{'form-group--error': isCodeError}">
 			<label class="form-group__label form-group__label--small">Введите код из SMS, который мы отправили 5 секунд назад</label>
 			<div class="form-group__row">
-				<input class="form-group__input" type="text" name="code" placeholder="Код" v-model="code">
+				<input class="form-group__input" type="text" name="code" placeholder="Код" @input="inputCode">
 				<button
 					@click="sendCode"
 					type="button"
@@ -30,6 +30,7 @@
 				>
 				Отправить</button>
 			</div>
+			<span class="form-group__error-text">Неверный код.</span>
 		</div>
 		<p class="modal__hint">
 			Если код не пришёл, запросите
@@ -43,25 +44,34 @@
 	const emit = defineEmits(['getToken'])
 	const store = useStore();
 	const phoneNumber = ref('79187024219');
-	const code = ref('');
 	function inputNumber ({target})
 	{
+		isPhoneButtonDisabled.value = false;
 		phoneNumber.value = target.value
 	};
-	const isPhoneSend = ref(false);
+	const isPhoneButtonDisabled = ref(false);
 	function sendNumber()
 	{
 		store.dispatch('user/fetchPhone', phoneNumber.value).then(async (response)=>{
 			let data = await response.json();
-			isPhoneSend.value = data.success;
+			isPhoneButtonDisabled.value = data.success;
 		});
 	};
+
+	const isCodeError = ref(false);
+	const code = ref('');
 	const isCodeSend = ref(false);
+	function inputCode ({target})
+	{
+		isCodeSend.value = false;
+		code.value = target.value;
+	};
 	async function sendCode()
 	{
 		let response = await store.dispatch('user/fetchUserCode', {phone: phoneNumber.value, code: code.value });
 		let data = await response.json()
 		isCodeSend.value = data.success;
+		isCodeError.value = !data.success;
 		emit('getToken', data.token);
 	};
 	function reset()
